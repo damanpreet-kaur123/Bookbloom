@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Order Summary</title>
+
+<style>
+body{
+    font-family: Arial;
+    background: linear-gradient(to right, purple, blueviolet);
+    padding: 20px;
+}
+
+.container{
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 700px;
+    margin: auto;
+}
+
+.container h1{
+    text-align: center;
+}
+
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td{
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+th{
+    background: #eee;
+}
+
+
+td img{
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+
+.total{
+    text-align: right;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+
+.success{
+    color: green;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+
+button{
+    padding: 10px 15px;
+    margin-top: 15px;
+    border: none;
+    background: green;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover{
+    background: darkgreen;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Order Summary</h1>
+
+<div id="order-details"></div>
+
+<button onclick="window.print()">Print Receipt</button>
+<button onclick="window.location.href='index.html'">Continue Shopping</button>
+
+</div>
+
+<script>
+
+let order = JSON.parse(localStorage.getItem("orderData"));
+let container = document.getElementById("order-details");
+
+if(!order || !order.items || order.items.length === 0){
+    container.innerHTML = "<h2>No Order Found</h2>";
+}else{
+
+let total = 0;
+
+let html = `
+<h2>Customer Details</h2>
+<p><b>Name:</b> ${order.name}</p>
+<p><b>Email:</b> ${order.email}</p>
+<p><b>Phone:</b> ${order.phone}</p>
+<p><b>Address:</b> ${order.address}</p>
+
+<h2>Payment Method</h2>
+<p><b>${order.payment.toUpperCase()}</b></p>
+
+<h2>Products</h2>
+
+<table>
+<tr>
+<th>Image</th>
+<th>Product</th>
+<th>Price</th>
+<th>Qty</th>
+<th>Total</th>
+</tr>
+`;
+
+order.items.forEach(item=>{
+    let itemTotal = item.price * item.quantity;
+    total += itemTotal;
+
+    html += `
+    <tr>
+    <td><img src="${item.image}"></td>
+    <td>${item.name}</td>
+    <td>₹${item.price}</td>
+    <td>${item.quantity}</td>
+    <td>₹${itemTotal}</td>
+    </tr>
+    `;
+});
+
+html += `
+</table>
+
+<div class="total">
+<b>Total Amount: ₹${total}</b>
+</div>
+
+<div class="success">
+Order Placed Successfully!
+</div>
+`;
+
+container.innerHTML = html;
+}
+</script>
+
+</body>
+</html>

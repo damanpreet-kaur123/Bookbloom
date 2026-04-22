@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-image: url("images/Bookstore.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+        }
+        .login{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            opacity: 100%;
+            padding: 80px;
+            border-radius: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .password-box {
+    position: relative;
+}
+
+.password-box input {
+    width: 85%;
+    padding: 10px;
+    padding-right: 40px;
+}
+
+#togglePassword {
+    position: absolute;
+    right: 1px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+}
+    </style>
+</head>
+<body>
+    <div class="login">
+        <h1>Register Form</h1>
+        <form onsubmit="return validateForm();">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" placeholder="Enter your name"><br>
+            <label for="email">Email-Id:</label><br>
+            <input type="email" id="email" name="email" placeholder="Enter your email"><br>
+            <label for="password">Password:</label><br>
+            <div class="password-box">
+    <input type="password" id="password" name="password" placeholder="Enter your Password">
+    <span id="togglePassword">👁</span>
+</div>
+             <label for="password">Confirm Password:</label><br>
+            <div class="password-box">
+    <input type="password" id="cpassword" name="cpassword" placeholder="Enter your repeat password">
+</div>
+            <input type="submit" value="Register">
+
+            <p>Already have an account? <a href="login.html">Login here</a></p>
+        </form>
+    </div>
+
+        <script>
+const togglePassword = document.getElementById("togglePassword");
+const passwordField = document.getElementById("password");
+
+togglePassword.addEventListener("click", function () {
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        togglePassword.textContent = "🙈";
+    } else {
+        passwordField.type = "password";
+        togglePassword.textContent = "👁";
+    }
+});
+
+function validateForm() {
+
+    let user = document.getElementById("username").value;
+    let email = document.getElementById("email").value;
+    let pass = document.getElementById("password").value;
+    let cpass = document.getElementById("cpassword").value;
+
+    if (user.trim() === "" || email.trim() === "" || pass.trim() === "" || cpass.trim() === "") {
+        alert("All fields are required!");
+        return false;
+    }
+
+    if (pass !== cpass) {
+        alert("Passwords do not match!");
+        return false;
+    }
+
+    
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    
+    let exists = users.some(u => u.email === email);
+    if (exists) {
+        alert("User already registered with this email!");
+        return false;
+    }
+
+    
+    users.push({
+        username: user,
+        email: email,
+        password: pass
+    });
+
+    
+    localStorage.setItem("users", JSON.stringify(users));
+
+    alert("Registration successful!");
+    window.location.href = "login.html";
+
+    return false;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>BookBloom</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="header">
+<h1><i class="fa-solid fa-book"></i> BookBloom</h1>
+<div class="user">
+<span id="userName"></span>
+<a href="cart.html">Cart 🛒 (<span id="cart-count">0</span>)</a>
+
+<button onclick="logout()">Logout</button>
+</div>
+</div>
+<div class="navbar">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="#books">Books</a></li>
+        <li><a href="#about">About</a></li>   
+        <li><a href="#contact">Contact us</a></li>
+        <li><a href="#Services">Services</a></li>
+    </ul>
+</div>
+
+<div class="head" id="books">
+    <h2>All Books</h2>
+</div>
+<div class="products">
+
+<div class="product">
+    <img src="images/wewerenevermeanttobe.webp" alt="images/webp" width="200" height="200">
+<h3>We Were Never Meant To Be By Palle Vasu</h3>
+<p>₹150</p>
+<button onclick="addToCart('We Were Never Meant To Be By Palle Vasu', 150, 'images/wewerenevermeanttobe.webp')">Add to Cart</button>
+</div>
+
+<div class="product">
+  <img src="images/dontbelieve.jpg" alt="images/jpg" width="200" height="200">
+<h3>Don't Believe Everything You Think by Joseph Nguyen</h3>
+<p>₹100</p>
+<button onclick="addToCart('Don\'t Believe Everything You Think by Joseph Nguyen', 100, 'images/dontbelieve.jpg')">Add to Cart</button>
+</div>
+
+<div class="product">
+  <img src="images/thesecret.jpg" alt="images/jpg" width="200" height="200">
+<h3> The Secret Garden by Hodgson Burnett </h3>
+<p>₹130</p>
+<button onclick="addToCart('The Secret Garden by Hodgson Burnett', 130, 'images/thesecret.jpg')">Add to Cart</button>
+</div>
+
+<div class="product">
+  <img src="images/greatest.jpg" alt="images/jpg" width="200" height="200">
+<h3>Greatest Short Stories For Children</h3>
+<p>₹250</p>
+<button onclick="addToCart('Greatest Short Stories For Children', 250, 'images/greatest.jpg')">Add to Cart</button>
+</div>
+<div class="product">
+  <img src="images/thejungle.jpg" alt="images/jpg" width="200" height="200">
+<h3>Famous Jungle Stories book for kids</h3>
+<p>₹100</p>
+<button onclick="addToCart('Famous Jungle Stories book for kids', 100, 'images/thejungle.jpg')">Add to Cart</button>
+</div>
+<div class="product">
+  <img src="images/spokenenglish.jpg" alt="images/jpg" width="200" height="200">
+<h3>Spoken English for Intermediate and Advance Level : Sadhna Syal</h3>
+<p>₹250</p>
+<button onclick="addToCart('Spoken English for Intermediate and Advance Level : Sadhna Syal', 250, 'images/spokenenglish.jpg')">Add to Cart</button>
+</div>
+<div class="product">
+  <img src="images/ielts.jpg" alt="images/jpg" width="200" height="200">
+<h3>The Official Cambridge Guide to IELTS</h3>
+<p>₹650</p>
+<button onclick="addToCart('The Official Cambridge Guide to IELTS', 650, 'images/ielts.jpg')">Add to Cart</button>
+</div>
+<div class="product">
+  <img src="images/Java.jpg" alt="images/jpg" width="200" height="200">
+<h3>Learn Programming in Java by Anshuman Sharma</h3>
+<p>₹510</p>
+<button onclick="addToCart('Learn Programming in Java by Anshuman Sharma', 510, 'images/Java.jpg')">Add to Cart</button>
+</div>
+<div class="product">
+  <img src="images/cprog.jpg" alt="images/jpg" width="200" height="200">
+<h3>Learn Programming in C by Anshuman Sharma</h3>
+<p>₹525</p>
+<button onclick="addToCart('Learn Programming in C by Anshuman Sharma', 525, 'images/cprog.jpg')">Add to Cart</button>
+</div>
+<div class="product">
+  <img src="images/bellthebelljar.webp" alt="images/webp" width="200" height="200">
+<h3>Bell the Bell Jar by Sylvia Plath</h3>
+<p>₹120</p>
+<button onclick="addToCart('Bell the Bell Jar by Sylvia Plath', 120, 'images/bellthebelljar.webp')">Add to Cart</button>
+</div>
+<div class="product">
+  <img src="images/wisdom.webp" alt="images/webp" width="200" height="200">
+<h3>Wisdom to Live by Confuctus</h3>
+<p>₹220</p>
+<button onclick="addToCart('Wisdom to Live by Confuctus', 220, 'images/wisdom.webp')">Add to Cart</button>
+</div>
+<div class="product">
+  <img src="images/3men.webp" alt="images/webp" width="200" height="200">
+<h3>Three Men in a Boat by Jerome K. Jerome</h3>
+<p>₹200</p>
+<button onclick="addToCart('Three Men in a Boat by Jerome K. Jerome', 200, 'images/3men.webp')">Add to Cart</button>
+</div>
+<div class="product">
+  <img src="images/100select.webp" alt="images/webp" width="200" height="200">
+<h3>100 Selected Poems, William Wordsworth</h3>
+<p>₹380</p>
+<button onclick="addToCart('100 Selected Poems, William Wordsworth', 380, 'images/100select.webp')">Add to Cart</button>
+</div>
+<div class="product">
+  <img src="images/gitanjali.webp" alt="images/webp" width="200" height="200">
+<h3>Gitanjali by Rabindranath Tagore</h3>
+<p>₹140</p>
+<button onclick="addToCart('Gitanjali by Rabindranath Tagore', 140, 'images/gitanjali.webp')">Add to Cart</button>
+</div>
+<div class="product">
+  <img src="images/greatestpoetry.webp" alt="images/webp" width="200" height="200">
+<h3>Greatest Poetry Ever Written by Grapevine </h3>
+<p>₹225</p>
+<button onclick="addToCart('Greatest Poetry Ever Written by Grapevine ', 225, 'images/greatestpoetry.webp')">Add to Cart</button>
+</div>
+</div>
+<div class="footer">
+<div class="start">
+    <h2>BookBloom</h2>
+    <p>BookBloom is an online bookstore where readers can discover, explore, and buy books from different categories. Our mission is to help knowledge and imagination bloom through reading.</p>
+</div>
+<div class="second">
+    <h2>Quick Links</h2>
+    <ul>
+        <li>Home</li>
+        <li>Books</li>
+        <li>About us</li>
+        <li>Contact us</li>
+    </ul>
+</div>
+<div class="second">
+    <h2>Books Categories</h2>
+    <ul>
+        <li>Novels</li>
+        <li>Stories</li>
+        <li>Poems</li>
+        <li>Computer Books</li>
+    </ul>
+</div>
+<div class="second">
+    <h2>Customer Supports</h2>
+    <ul>
+        <li>FAQ</li>
+        <li>Shipping & Delivery</li>
+        <li>Return Policy</li>
+        <li>Help Center</li>
+    </ul>
+</div>
+<div class="second">
+    <h2>Contact information</h2>
+    <ul>
+        <li>Punjab, India</li>
+        <li>support@bookbloom.com</li>
+        <li>+91 98765 43210</li>
+    </ul>
+</div>
+<div class="second">
+    <h2>Social Media</h2>
+    <ul class="inline">
+        <li><i class="fa-brands fa-facebook"></i></li>
+        <li><i class="fa-brands fa-instagram"></i></li>
+        <li><i class="fa-brands fa-twitter"></i></li>
+        <li><i class="fa-brands fa-linkedin"></i></li>
+    </ul>
+</div>
+</div>
+<div class="footer-end">
+    <p>© 2026 BookBloom. All Rights Reserved.</p>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Your Cart</title>
+
+<style>
+body{
+    background: linear-gradient(to right, purple, blueviolet);
+    color: black;
+    text-align: center;
+    font-family: Arial;
+    margin: 0;
+}
+
+h1{
+    padding: 20px;
+    color: white;
+}
+
+table{
+    width: 95%;
+    margin: 20px auto;
+    background: white;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th{
+    background: #eee;
+}
+
+tr .pro{
+    width: 500px;
+}
+
+th, td{
+    padding: 15px;
+    border: 1px solid #ccc;
+}
+
+td img{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin: auto;
+    border-radius: 5px;
+}
+
+button{
+    background: green;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover{
+    background: darkgreen;
+}
+
+.checkout-btn{
+    margin-top: 15px;
+    background: limegreen;
+    padding: 12px 20px;
+    font-size: 16px;
+}
+h2{
+    color: white;
+}
+</style>
+
+</head>
+<body>
+
+<h1>Your Cart</h1>
+
+<table>
+<thead>
+<tr>
+<th>Image</th>
+<th class="pro">Product</th>
+<th>Price</th>
+<th>Quantity</th>
+<th>Total</th>
+<th>Remove</th>
+</tr>
+</thead>
+
+<tbody id="cart-items"></tbody>
+</table>
+
+<h2>Total: ₹<span id="cart-total">0</span></h2>
+
+<a href="checkout.html">
+<button class="checkout-btn">Proceed to Checkout</button>
+</a>
+
+<script>
+
+
+const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+if (!user) {
+    alert("Please login first");
+    window.location.href = "login.html";
+}
+
+
+const cartKey = "cart_" + user.email;
+
+
+let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+
+
+function loadCart() {
+
+    let cartItems = document.getElementById("cart-items");
+    let totalEl = document.getElementById("cart-total");
+
+    cartItems.innerHTML = "";
+    let total = 0;
+
+    if (cart.length === 0) {
+        cartItems.innerHTML = `
+        <tr>
+            <td colspan="6">Your cart is empty</td>
+        </tr>`;
+        totalEl.innerText = 0;
+        return;
+    }
+
+    cart.forEach((item, index) => {
+
+        let itemTotal = item.price * item.quantity;
+        total += itemTotal;
+
+        cartItems.innerHTML += `
+        <tr>
+            <td><img src="${item.image}" width="70"></td>
+            <td>${item.name}</td>
+            <td>₹${item.price}</td>
+
+            <td>
+                <button onclick="changeQty(${index}, -1)">-</button>
+                ${item.quantity}
+                <button onclick="changeQty(${index}, 1)">+</button>
+            </td>
+
+            <td>₹${itemTotal}</td>
+
+            <td>
+                <button onclick="removeItem(${index})">X</button>
+            </td>
+        </tr>
+        `;
+    });
+
+    totalEl.innerText = total;
+}
+
+
+function changeQty(index, change) {
+
+    cart[index].quantity += change;
+
+    if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+    }
+
+    localStorage.setItem(cartKey, JSON.stringify(cart));
+    loadCart();
+}
+
+
+function removeItem(index) {
+    cart.splice(index, 1);
+    localStorage.setItem(cartKey, JSON.stringify(cart));
+    loadCart();
+}
+
+
+loadCart();
+
+</script>
+
+</body>
+</html>
